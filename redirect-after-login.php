@@ -42,6 +42,11 @@ function redirect_after_login_per_role( $redirect_to, $requested_redirect_to, $u
 	//retrieve current user info 
 	global $wp_roles;
 	    
+	// If the user is logging in from the shop, don't redirect
+	if ( preg_match( "/checkout/" , $redirect_to ) ) {
+		return $redirect_to;
+	}
+
 	$roles = $wp_roles->roles;
 	$setting = get_option('mtral_settings');
 	
